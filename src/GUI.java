@@ -32,10 +32,10 @@ public class GUI extends PApplet {
 	public void draw() {
 		background(200);
 		sim.doOneStep(); //add the checking for generation in here as well
-		Simulator.slowDown();
-		Simulator.slowDown();
 		display.drawGrid(sim.getForest());
-		//display.drawGrid(sim.getGrid()); // display the game
+		if(!sim.getForest().isThereFire()){
+			sim.nextGen();
+		}
 	}
 	
 	public void keyReleased(){

@@ -24,13 +24,16 @@ public class Simulator {
 		}
 	}
 	
+	public void nextGen(){
+		forest.nextGeneration();
+	}
+	
 	public void run(){
 		boolean isAblaze = forest.isThereFire();
 		while(isAblaze){
 			forest.timeStep();
 			isAblaze = forest.isThereFire();
 		}
-		
 		Data thisForest = new Data(forest.getDensity(), forest.assess());
 		dataSet.add(thisForest);
 		//have some sort of while loop that allows this to run unitl no more fire
@@ -62,7 +65,7 @@ public class Simulator {
 	}
 	
 	public static void slowDown(){
-		for(int x = 0; x < 1000000; x ++){
+		for(int x = 0; x < 100; x ++){
 			System.out.print("");
 		}
 	}

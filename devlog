@@ -1,0 +1,12 @@
+Day 1: 5/12/16
+-added devlog
+-Added basic framework of generation propegation into appropriate classes
+	- added nextGeneration and propegate to Forest
+		-NextGeneration finds the indeces of which trees are alive, and for each one that is, that tree is stored in a new forest along with the other trees around it
+		-propegate is what runs inside nextGeneration- determines the indeces that each tree will grow more trees in, then uses the child method in Tree to determine whether something will grow there
+	-added child to Tree
+		- takes a constant growth probability, compares it to a random number, and returns a constructed tree similar to the surviving parent, with some random variation
+	-added nextGen to Simulator
+		-runs nextGeneration in Forest
+	-edited the Draw method in GUI
+		-every loop, checks for fire. If there is none, the next generation is called.
