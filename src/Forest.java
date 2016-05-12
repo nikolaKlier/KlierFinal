@@ -31,6 +31,10 @@ public class Forest {
 		return forest;
 	}
 	
+	public void setForest(Tree[][] forest) {
+		this.forest = forest;
+	}
+
 	public void setRandomFire(){
 		setFire(Location.randLoc(forest.length, forest[0].length));
 	}
@@ -84,6 +88,7 @@ public class Forest {
 	public boolean isThereFire() {
 		for(int x = 0; x < forest.length; x ++){
 			for(int y = 0; y < forest[0].length; y++){
+				forest[x][y].updateState();
 				if(forest[x][y].getState() == Tree.ON_FIRE) return true;
 			}
 		}
@@ -105,6 +110,7 @@ public class Forest {
 	
 	public void nextGeneration(){
 		Tree[][] newForest = forest;
+		System.out.println("in the loop");
 		for(int x = 0; x < forest.length; x++){
 			for(int y = 0; y < forest[0].length; y++){
 				if(forest[x][y].getState() == Tree.ALIVE){

@@ -42,7 +42,6 @@ public class Tree {
 		this.type = type;
 		this.seedDrop = defaultSeedDrop;
 		this.state = ALIVE;
-		System.out.println("consturcting a live tree");
 	}
 
 	public double getCatchProb() {
@@ -97,7 +96,8 @@ public class Tree {
 		if(neighborHeat > 0){
 			double tempHeat = neighborHeat/100;
 		double rand = Math.random();
-		double prob = ((density + tempHeat + catchProb)/3);
+		//double prob = ((density + tempHeat + catchProb)/3);
+		double prob = ((tempHeat + catchProb)/2);
 		if(state == ALIVE && prob > rand){
 			heat = neighborHeat;
 			updateState(); 
@@ -123,10 +123,15 @@ public class Tree {
 	}
 	
 	public static Tree child(Tree parent){
-		double catchProbNew = parent.getCatchProb() + ((Math.random()*CATCHPROBSVAR[parent.getType()]) - CATCHPROBSVAR[parent.getType()]);
-		double fuelNew = parent.getStartFuel() + ((Math.random()*FUELVAR[parent.getType()]) - FUELVAR[parent.getType()]);
-		double heatDegradeNew = HEATDEGRADES[parent.getType()];
-		System.out.println("Making a child tree with a fuel of " + fuelNew + " a heat degredation of " + heatDegradeNew + " and a catching probability of " + catchProbNew);
+		//double catchProbNew = parent.getCatchProb() + ((Math.random()*CATCHPROBSVAR[parent.getType()]) - CATCHPROBSVAR[parent.getType()]);
+		//double fuelNew = parent.getStartFuel() + ((Math.random()*FUELVAR[parent.getType()]) - FUELVAR[parent.getType()]);
+		//double fuelNew = parent.getStartFuel();
+		
+		//double heatDegradeNew = HEATDEGRADES[parent.getType()];
+		double fuelNew = 100;
+		double catchProbNew = 0.4;
+		double heatDegradeNew = 8;
+		//System.out.println("Making a child tree with a fuel of " + fuelNew + " a heat degredation of " + heatDegradeNew + " and a catching probability of " + catchProbNew);
 		return new Tree(catchProbNew, fuelNew, heatDegradeNew, parent.getType());
 	}
 

@@ -19,7 +19,7 @@ public class GUI extends PApplet {
 		// Set different grid values to different colors
 		display.setColor(Tree.ON_FIRE, color(255, 0, 0)); 
 		display.setColor(Tree.ALIVE, color(0, 255, 0));
-		display.setColor(Tree.DEAD, color(255, 255, 255));
+		display.setColor(Tree.DEAD, color(102, 51, 0));
 		// You can use classes instead, for example:
 		// display.setColor(Tree.class, color(0, 255, 0));
 		// display.setColor(Ash.class, color(0, 255, 0));
@@ -31,14 +31,18 @@ public class GUI extends PApplet {
 	@Override
 	public void draw() {
 		background(200);
-		sim.doOneStep(); //add the checking for generation in here as well
+		sim.doOneStep(); 
+		Simulator.slowDown();//add the checking for generation in here as well
 		display.drawGrid(sim.getForest());
-		if(!sim.getForest().isThereFire()){
-			sim.nextGen();
-		}
+
+
 	}
 	
 	public void keyReleased(){
-		sim.doOneStep();
+		if(!sim.isBurning()){ 
+			sim.nextGen();
+			sim.setFire();
+		}
+	
 	}
 }

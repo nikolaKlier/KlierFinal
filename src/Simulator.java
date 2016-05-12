@@ -25,8 +25,10 @@ public class Simulator {
 	}
 	
 	public void nextGen(){
+		System.out.println("running the next generations");
 		forest.nextGeneration();
 	}
+	
 	
 	public void run(){
 		boolean isAblaze = forest.isThereFire();
@@ -64,8 +66,13 @@ public class Simulator {
 		this.forest = forest;
 	}
 	
+	public void setFire(){
+		for(int x = 0; x < 10; x++){
+			forest.setRandomFire();
+		}
+	}
 	public static void slowDown(){
-		for(int x = 0; x < 100; x ++){
+		for(int x = 0; x < 100000; x ++){
 			System.out.print("");
 		}
 	}
