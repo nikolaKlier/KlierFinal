@@ -10,3 +10,4 @@ Day 1: 5/12/16
 		-runs nextGeneration in Forest
 	-edited the Draw method in GUI
 		-every loop, checks for fire. If there is none, the next generation is called.
+!!!!! bug notice: instead of continuing to next generation, forest grid fills with grey squares. Could be dead trees or simply empty.
