@@ -5,7 +5,7 @@ public class Forest {
 	private Tree[][] forest;
 	private final int DEFAULT_FOREST_HIEGHT = 50;
 	private final int DEFAULT_FOREST_WIDTH = 50;
-	public static final double DEFAULT_FOREST_DENSE = 0.5;
+	public static final double DEFAULT_FOREST_DENSE = 0.2;
 	public Forest (double dense){
 		density = dense;
 		forest = new Tree[DEFAULT_FOREST_HIEGHT][DEFAULT_FOREST_WIDTH];
@@ -107,7 +107,8 @@ public class Forest {
 		Tree[][] newForest = forest;
 		for(int x = 0; x < forest.length; x++){
 			for(int y = 0; y < forest[0].length; y++){
-				if(forest[x][y] != null){
+				if(forest[x][y].getState() == Tree.ALIVE){
+					System.out.println("running propegate at " + x + " ," + y);
 					newForest = propegate(x, y, newForest);
 				}
 			}
@@ -121,7 +122,7 @@ public class Forest {
 			for(int c = y - 1; c <= y + 1; c++){
 				//rand = Math.random(); //def want this line, just testing stuff
 				//if(r != x && c != y && (forest[x][y].getSeedDrop() > rand) && c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
-				if( c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
+				if(r != x && c != y &&  c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
 				forest[r][c] = Tree.child(forest[x][y]);
 				}
 			}
