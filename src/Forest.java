@@ -108,7 +108,7 @@ public class Forest {
 		for(int x = 0; x < forest.length; x++){
 			for(int y = 0; y < forest[0].length; y++){
 				if(forest[x][y].getState() == Tree.ALIVE){
-					System.out.println("running propegate at " + x + " ," + y);
+					System.out.println("found live tree at " + x + " ," + y);
 					newForest = propegate(x, y, newForest);
 				}
 			}
@@ -117,13 +117,14 @@ public class Forest {
 	}
 	
 	public static Tree[][] propegate(int x, int y, Tree[][] forest){
-		double rand = 0;
+		//double rand = 0;
 		for(int r = x - 1; r <= x + 1; r++){
 			for(int c = y - 1; c <= y + 1; c++){
 				//rand = Math.random(); //def want this line, just testing stuff
 				//if(r != x && c != y && (forest[x][y].getSeedDrop() > rand) && c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
 				if(r != x && c != y &&  c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
-				forest[r][c] = Tree.child(forest[x][y]);
+					System.out.println("got through if statement in propegate");
+					forest[r][c] = Tree.child(forest[x][y]);
 				}
 			}
 		}
