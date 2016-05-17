@@ -12,3 +12,19 @@ Day 1: 5/12/16
 		-every loop, checks for fire. If there is none, the next generation is called.
 !!!!! bug notice: instead of continuing to next generation, forest grid fills with grey squares. Could be dead trees or simply empty.
 !!!!! Bug FIX: was working on old versions of GUI, simulator, and tree. Updates in Forest were not reaching these classes. Now working in correct locations. Deleting confusing extra projects from workspace, keeping them as a backup somewhere else
+
+Out of class 1: 5/14/2016
+!Bug: forest grid fills with living trees instead of next generation
+-for bug fixing purposes, all trees in the next generation have been set to a constant tree as opposed to a variant of the parent
+!!!HUGE FIX: remember the difference between passing by value and passing by reference. 
+-made forestHardCopy method which copies a 2D tree array by value, not by reference
+!!!bugs fixed, in addition to weird operations of how the fire burned
+-basic variance and parentage added: all kept constant except for catching probability
+	-catching probability observed to reduce in subsequent generations
+	
+In class 2: 5/16/16
+GOALS: to make the propegation and selection based on a realistic set of gene data as opposed to direct traits being considered
+	-this will make mutations, crossover, and realism easier to accomplish
+	-this will also make it easier to apply stuff to other problems
+Made TreeGenetic for redundancy, this will overwrite Tree when ready
+	-have working phenotypic variation in a safe backup location

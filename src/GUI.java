@@ -32,8 +32,8 @@ public class GUI extends PApplet {
 	public void draw() {
 		background(200);
 		sim.doOneStep(); 
-		Simulator.slowDown();//add the checking for generation in here as well
 		display.drawGrid(sim.getForest());
+		
 
 
 	}
@@ -43,6 +43,5 @@ public class GUI extends PApplet {
 			sim.nextGen();
 			sim.setFire();
 		}
-	
 	}
 }

@@ -25,7 +25,6 @@ public class Simulator {
 	}
 	
 	public void nextGen(){
-		System.out.println("running the next generations");
 		forest.nextGeneration();
 	}
 	
@@ -55,7 +54,9 @@ public class Simulator {
 	
 	public void doOneStep(){
 		//slowDown();
+		update();
 		forest.timeStep();
+		update();
 	}
 
 	public Forest getForest() {
@@ -99,6 +100,9 @@ public class Simulator {
 	public static void writeData(){
 		writeToFile(makeDensitiesString(), "densities");
 		writeToFile(makePercentsString(), "percentages");
+	}
+	public void update(){
+		forest.updateForest();
 	}
 	
 	public static void writeToFile(String toWrite, String filename) {

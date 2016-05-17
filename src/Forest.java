@@ -52,8 +52,16 @@ public class Forest {
 		}
 	}
 	
+	public void updateForest(){
+		for(int x = 0; x < forest.length; x ++){
+			for(int y = 0; y < forest[0].length; y++){
+			forest[x][y].updateState();
+			}
+			
+			}
+	}
 	public void timeStep(){
-		Tree[][] forestAblaze = forest;
+		Tree[][] forestAblaze = forestHardCopy(forest);
 		for(int x = 0; x < forest.length; x ++){
 			for(int y = 0; y < forest[0].length; y++){
 				forestAblaze[x][y] = forest[x][y];
@@ -82,7 +90,7 @@ public class Forest {
 				forestAblaze[x][y].treeTimeStep(highestHeat, density);
 			}
 		}
-		forest = forestAblaze;
+		forest = forestHardCopy(forestAblaze);
 	}
 
 	public boolean isThereFire() {
@@ -109,32 +117,45 @@ public class Forest {
 	}
 	
 	public void nextGeneration(){
-		Tree[][] newForest = forest;
-		System.out.println("in the loop");
+		Tree[][] newForest = forestHardCopy(forest);
 		for(int x = 0; x < forest.length; x++){
 			for(int y = 0; y < forest[0].length; y++){
 				if(forest[x][y].getState() == Tree.ALIVE){
-					System.out.println("found live tree at " + x + " ," + y);
-					newForest = propegate(x, y, newForest);
+					newForest = propegate(x, y, newForest, forest);
 				}
 			}
 		}
-		forest = newForest;
+		forest = forestHardCopy(newForest);
 	}
 	
-	public static Tree[][] propegate(int x, int y, Tree[][] forest){
-		//double rand = 0;
+	public static Tree[][] propegate(int x, int y, Tree[][] forest, Tree[][] oldForest){
+		int numParents = (int)(10*forest[x][y].getSeedDrop());
+		Tree[] parents = new Tree[numParents];
+		for(int n = 0; n < parents.length; n++){
+			
+		}
+		double rand = 0;
 		for(int r = x - 1; r <= x + 1; r++){
 			for(int c = y - 1; c <= y + 1; c++){
-				//rand = Math.random(); //def want this line, just testing stuff
-				//if(r != x && c != y && (forest[x][y].getSeedDrop() > rand) && c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
-				if(r != x && c != y &&  c < forest.length && c >= 0 && r >= 0 && r < forest[0].length){
-					System.out.println("got through if statement in propegate");
-					forest[r][c] = Tree.child(forest[x][y]);
+				rand = Math.random(); //def want this line, just testing stuff
+				for(Tree t : parents){
+					if((forest[x][y].getSeedDrop() > rand) && r != x && c != y &&  c < forest.length && c >= 0 && r >= 0 && r < forest[0].length && forest[r][c].getState() == Tree.DEAD){
+						forest[r][c] = Tree.child(forest[x][y]);
+					}
 				}
 			}
 		}
 		return forest;
+	}
+	
+	public static Tree[][] forestHardCopy(Tree[][] f){ //prevents passing by reference
+		Tree[][] newF = new Tree[f.length][f[0].length];
+		for(int x = 0; x < f.length; x++){
+			for(int y = 0; y < f[0].length; y++){
+				newF[x][y] = f[x][y];
+			}
+		}
+		return newF;
 	}
 	
 }

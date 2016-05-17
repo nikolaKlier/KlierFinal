@@ -1,5 +1,6 @@
 
 public class Tree {
+	public static final String[] stateNames ={"Alive", "On fire", "dead" };
 	public static final int ALIVE = 0;
 	public static final int ON_FIRE = 1;
 	public static final int DEAD = 2;
@@ -76,6 +77,7 @@ public class Tree {
 	}
 	
 	public int getState(){
+		updateState();
 		return this.state;
 	}
 	
@@ -123,15 +125,13 @@ public class Tree {
 	}
 	
 	public static Tree child(Tree parent){
-		//double catchProbNew = parent.getCatchProb() + ((Math.random()*CATCHPROBSVAR[parent.getType()]) - CATCHPROBSVAR[parent.getType()]);
+		double catchProbNew = parent.getCatchProb() + ((Math.random()*CATCHPROBSVAR[parent.getType()]) - CATCHPROBSVAR[parent.getType()]);
 		//double fuelNew = parent.getStartFuel() + ((Math.random()*FUELVAR[parent.getType()]) - FUELVAR[parent.getType()]);
-		//double fuelNew = parent.getStartFuel();
-		
-		//double heatDegradeNew = HEATDEGRADES[parent.getType()];
+		double heatDegradeNew = HEATDEGRADES[parent.getType()];
 		double fuelNew = 100;
-		double catchProbNew = 0.4;
-		double heatDegradeNew = 8;
-		//System.out.println("Making a child tree with a fuel of " + fuelNew + " a heat degredation of " + heatDegradeNew + " and a catching probability of " + catchProbNew);
+//		double catchProbNew = 0.4;
+//		double heatDegradeNew = 8;
+		System.out.println("Making a child tree with a fuel of " + fuelNew + " a heat degredation of " + heatDegradeNew + " and a catching probability of " + catchProbNew);
 		return new Tree(catchProbNew, fuelNew, heatDegradeNew, parent.getType());
 	}
 
