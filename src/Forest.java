@@ -21,9 +21,8 @@ public class Forest {
 	}
 	
 	public void setFire(Location loc){
-		int randHeat = 90 + (int)(Math.random() * 11); //gives between 90 and 100
+		int randHeat = 90 + (int)(Math.random()* 11); //gives between 90 and 100
 		forest[loc.getRow()][loc.getCol()].setHeat(randHeat);
-		//forest[loc.getRow()][loc.getCol()].setHeat(1);
 		forest[loc.getRow()][loc.getCol()].updateState();
 	}
 	
@@ -69,8 +68,6 @@ public class Forest {
 				if(firstY < 0) firstY = 0;
 				if(lastY >= forest[0].length){ lastY = forest[0].length - 1;}
 				if(lastX >= forest.length){ lastX = forest.length - 1;}
-				//System.out.println("The neighbors are set for the x range of " + firstX + " to " + lastX + " and the y range of " + firstY + " to " + lastY);
-				//ArrayList<Tree> neighbors = new ArrayList<Tree>();
 				double highestHeat = 0;
 				if(forest[x][y].getState() == Tree.ALIVE){
 				for( int x1 = firstX; x1 <= lastX; x1 ++){
@@ -105,9 +102,7 @@ public class Forest {
 				if(forest[x][y].getState() == Tree.DEAD) burnCount++;
 			}
 		}
-		
 		double percent = (burnCount/((double)(forest.length * forest[0].length))) * 100;
-		//System.out.println("The forest with density of " +  density + " burned through " + percent + "%");
 		return percent;
 	}
 	
@@ -124,14 +119,18 @@ public class Forest {
 	}
 	
 	public static Tree[][] propegate(int x, int y, Tree[][] forest, Tree[][] oldForest){
+		System.out.println("propegating");
 		int numParents = (int)(10*forest[x][y].getSeedDrop());
 		int randX = (int)(Math.random()*forest.length);
 		int randY = (int)(Math.random()*forest[0].length);
 		Tree[] parents = new Tree[numParents];
+		System.out.println(forest[x][y]);
 		for(int n = 0; n < parents.length; n++){
-			while(forest[randX][randY].getState() == Tree.DEAD){
+			System.out.println("getting potential parents");
+			while(forest[randX][randY].getState() != Tree.ALIVE){
 				randX = (int)(Math.random()*forest.length);
 				randY = (int)(Math.random()*forest[0].length);
+				System.out.println("in the parent finding loop");
 			}
 		}
 		double rand = 0;
