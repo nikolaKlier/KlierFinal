@@ -31,6 +31,11 @@ public class GUI extends PApplet {
 	@Override
 	public void draw() {
 		background(200);
+		Simulator.slowDown();
+		Simulator.slowDown();
+		Simulator.slowDown();
+		Simulator.slowDown();
+		Simulator.slowDown();
 		sim.doOneStep(); 
 		display.drawGrid(sim.getForest());
 		

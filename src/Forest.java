@@ -42,12 +42,7 @@ public class Forest {
 	public void fill(){
 		for(int x = 0; x < forest.length; x ++){
 			for(int y = 0; y < forest[0].length; y++){
-				double rand = Math.random();
-				if(rand > 0.10){
-				forest[x][y] = new Tree("Sequoia");
-				} else {
-					forest[x][y] = new Tree("Fir");
-				}
+				forest[x][y] = new Tree();
 			}
 		}
 	}
@@ -87,7 +82,7 @@ public class Forest {
 				}
 				}
 				//System.out.println("The tree at " + x + " and " + y + " is undergoing a timestep");
-				forestAblaze[x][y].treeTimeStep(highestHeat, density);
+				forestAblaze[x][y].treeTimeStep(highestHeat);
 			}
 		}
 		forest = forestHardCopy(forestAblaze);
@@ -130,17 +125,22 @@ public class Forest {
 	
 	public static Tree[][] propegate(int x, int y, Tree[][] forest, Tree[][] oldForest){
 		int numParents = (int)(10*forest[x][y].getSeedDrop());
+		int randX = (int)(Math.random()*forest.length);
+		int randY = (int)(Math.random()*forest[0].length);
 		Tree[] parents = new Tree[numParents];
 		for(int n = 0; n < parents.length; n++){
-			
+			while(forest[randX][randY].getState() == Tree.DEAD){
+				randX = (int)(Math.random()*forest.length);
+				randY = (int)(Math.random()*forest[0].length);
+			}
 		}
 		double rand = 0;
 		for(int r = x - 1; r <= x + 1; r++){
 			for(int c = y - 1; c <= y + 1; c++){
-				rand = Math.random(); //def want this line, just testing stuff
+				rand = Math.random();
 				for(Tree t : parents){
 					if((forest[x][y].getSeedDrop() > rand) && r != x && c != y &&  c < forest.length && c >= 0 && r >= 0 && r < forest[0].length && forest[r][c].getState() == Tree.DEAD){
-						forest[r][c] = Tree.child(forest[x][y]);
+						forest[r][c] = Tree.child(forest[x][y], t);
 					}
 				}
 			}
