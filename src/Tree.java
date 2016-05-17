@@ -4,9 +4,9 @@ public class Tree {
 	public static final int ALIVE = 0;
 	public static final int ON_FIRE = 1;
 	public static final int DEAD = 2;
-	public static final double[] cpBOUNDS = {0.6, 1};
+	public static final double[] cpBOUNDS = {0, 1};
 	public static final double[] sfBOUNDS = {60, 200};
-	public static final double[] hdBOUNDS = {0, 10};
+	public static final double[] hdBOUNDS = {0, 20};
 	public static final double[] sdBOUNDS = {0.0, 0.2};
 	public static final double[] mrBOUNDS = {0.0, 1};
 	
@@ -174,13 +174,17 @@ public class Tree {
 		}
 		rand = Math.random();
 		if(rand < childMutate){
-			child = new Tree();
+			childMutate = (Math.random()*(mrBOUNDS[1] - mrBOUNDS[0]) + mrBOUNDS[0]);
 		}
 		
 		if(rand < 0.5){
 			childCatch = parent1.getCatchProb();
 		} else {
 			childCatch = parent2.getCatchProb();
+		}
+		rand = Math.random();
+		if(rand < childMutate){
+			childCatch = (Math.random()*(cpBOUNDS[1] - cpBOUNDS[0]) + cpBOUNDS[0]);
 		}
 		
 		rand = Math.random();
@@ -189,12 +193,20 @@ public class Tree {
 		} else {
 			childFuel = parent2.getStartFuel();
 		}
+		rand = Math.random();
+		if(rand < childMutate){
+			childFuel = (Math.random()*(sfBOUNDS[1] - sfBOUNDS[0]) + sfBOUNDS[0]);
+		}
 		
 		rand = Math.random();
 		if(rand < 0.5){
 			childHeatDegrade = parent1.getHeatDegrade();
 		} else {
 			childHeatDegrade = parent2.getHeatDegrade();
+		}
+		rand = Math.random();
+		if(rand < childMutate){
+			childHeatDegrade = (Math.random()*(hdBOUNDS[1] - hdBOUNDS[0]) + hdBOUNDS[0]);
 		}
 		
 		rand = Math.random();
@@ -203,17 +215,17 @@ public class Tree {
 		} else {
 			childSeedDrop = parent2.getSeedDrop();
 		}
-		
-
-		
+		rand = Math.random();
+		if(rand < childMutate){
+			childSeedDrop = (Math.random()*(sdBOUNDS[1] - sdBOUNDS[0]) + sdBOUNDS[0]);
+		}
 		
 		Tree child = new Tree(childCatch, childFuel, childHeatDegrade, childSeedDrop, childMutate);
 		rand = Math.random();
 		if(rand < childMutate){
 			child = new Tree();
 		}
-		System.out.print("Making child:");
-		System.out.println(child);
+		//System.out.println(child);
 		return child;
 	}
 	

@@ -28,3 +28,14 @@ GOALS: to make the propegation and selection based on a realistic set of gene da
 	-this will also make it easier to apply stuff to other problems
 Made TreeGenetic for redundancy, this will overwrite Tree when ready
 	-have working phenotypic variation in a safe backup location
+	
+In class 3: 5/17/16
+GOALS: to have a functioning simulation of a varying, mutating population of trees
+	-goals accomplished!
+	-lots of time spent bugfixing
+added a "child" method in Tree that generates a child based upon two parents, each tree being a parent at least once
+trees now vary in the amount that burns
+
+Next steps, two things could happen:
+	-make data collection methods that assess the population as a whole, across generations, numerically instead of using visual cues
+	-use the same concepts of genetic algorithms to solve an unrelated problem- probably something with design

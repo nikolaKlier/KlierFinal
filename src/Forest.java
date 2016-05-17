@@ -21,7 +21,8 @@ public class Forest {
 	}
 	
 	public void setFire(Location loc){
-		int randHeat = 90 + (int)(Math.random()* 11); //gives between 90 and 100
+		//int randHeat = 90 + (int)(Math.random()* 11); //gives between 90 and 100
+		int randHeat = 95;
 		forest[loc.getRow()][loc.getCol()].setHeat(randHeat);
 		forest[loc.getRow()][loc.getCol()].updateState();
 	}

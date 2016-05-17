@@ -33,7 +33,10 @@ public class GUI extends PApplet {
 		background(200);
 		sim.doOneStep(); 
 		display.drawGrid(sim.getForest());
-		
+		if(!sim.isBurning()){ 
+			sim.nextGen();
+			sim.setFire();
+		}
 
 
 	}
