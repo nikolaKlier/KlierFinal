@@ -4,8 +4,9 @@ public class Tree {
 	public static final int ALIVE = 0;
 	public static final int ON_FIRE = 1;
 	public static final int DEAD = 2;
+	
 	public static final double[] cpBOUNDS = {0, 1};
-	public static final double[] sfBOUNDS = {60, 200};
+	public static final double[] sfBOUNDS = {200, 250};
 	public static final double[] hdBOUNDS = {0, 20};
 	public static final double[] sdBOUNDS = {0.0, 0.2};
 	public static final double[] mrBOUNDS = {0.0, 1};
@@ -31,7 +32,7 @@ public class Tree {
 		this.heat = 0;
 		this.state = ALIVE;
 	}
-	
+
 	public Tree(double catchProb, double fuel, double heatDegrade, double seedDrop, double mutationRate){
 		this.catchProb = catchProb;
 		this.startFuel = fuel;
@@ -43,7 +44,6 @@ public class Tree {
 		this.heat = 0;
 		this.state = ALIVE;
 	}
-
 	
 	public double getMutationRate() {
 		return mutationRate;
@@ -110,8 +110,7 @@ public class Tree {
 	}
 	
 	public void treeTimeStep(double neighborHeat){
-		willCatchFire(neighborHeat);
-		
+		willCatchFire(neighborHeat);	
 		fuel -= heat;
 		updateState();
 		heat -= heatDegrade;
@@ -142,28 +141,15 @@ public class Tree {
 			catchProb = 0;
 		}
 		if(heat > 0) state = ON_FIRE;
-		
-		//System.out.println(this);
 	}
 	
-	
-//	public Tree(){
-//		catchProb = (Math.random()*(cpBOUNDS[1] - cpBOUNDS[0]) + cpBOUNDS[0]);
-//		startFuel = (Math.random()*(sfBOUNDS[1] - sfBOUNDS[0]) + sfBOUNDS[0]);
-//		heatDegrade = (Math.random()*(hdBOUNDS[1] - hdBOUNDS[0]) + hdBOUNDS[0]);
-//		seedDrop = (Math.random()*(sdBOUNDS[1] - sdBOUNDS[0]) + sdBOUNDS[0]);
-//		mutationRate = (Math.random()*(mrBOUNDS[1] - mrBOUNDS[0]) + mrBOUNDS[0]);
-//		
-//		this.fuel = startFuel;
-//		this.heat = 0;
-//		this.state = ALIVE;
-//	}
 	public static Tree child(Tree parent1, Tree parent2){
 		double childCatch;
 		double childFuel;
 		double childHeatDegrade;
 		double childSeedDrop;
 		double childMutate;
+		
 		double rand = Math.random();
 		
 		rand = Math.random();
@@ -225,7 +211,7 @@ public class Tree {
 		if(rand < childMutate){
 			child = new Tree();
 		}
-		//System.out.println(child);
+
 		return child;
 	}
 	

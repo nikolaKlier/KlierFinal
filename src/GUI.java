@@ -7,7 +7,7 @@ public class GUI extends PApplet {
 
 	public void setup() {
 		size(640, 550); // set the size of the screen.
-		Forest f = new Forest(Forest.DEFAULT_FOREST_DENSE);
+		Forest f = new Forest();
 		// Create a simulator
 		sim = new Simulator(f);
 		sim.getForest();
@@ -32,6 +32,9 @@ public class GUI extends PApplet {
 	public void draw() {
 		background(200);
 		sim.doOneStep(); 
+		sim.slowDown();
+		sim.slowDown();
+		sim.slowDown();
 		display.drawGrid(sim.getForest());
 		if(!sim.isBurning()){ 
 			sim.nextGen();

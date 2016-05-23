@@ -39,3 +39,7 @@ trees now vary in the amount that burns
 Next steps, two things could happen:
 	-make data collection methods that assess the population as a whole, across generations, numerically instead of using visual cues
 	-use the same concepts of genetic algorithms to solve an unrelated problem- probably something with design
+	
+5/19
+	-made the data class
+		-gathers data in a fast way without GUI

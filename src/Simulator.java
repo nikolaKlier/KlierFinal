@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class Simulator {
 	Forest forest;
-	public static ArrayList<Data> dataSet;
+	public static ArrayList<Dataset> dataSet;
+	
 	
 	public Simulator(Forest f){ //good way to test stuff
 		forest = f;
@@ -29,13 +30,13 @@ public class Simulator {
 	}
 	
 	
-	public void run(){
+	public void run(){ //change the end condition
 		boolean isAblaze = forest.isThereFire();
 		while(isAblaze){
 			forest.timeStep();
 			isAblaze = forest.isThereFire();
 		}
-		Data thisForest = new Data(forest.getDensity(), forest.assess());
+		Data thisForest = forest.assess(); //fix this in forest to return the data
 		dataSet.add(thisForest);
 		//have some sort of while loop that allows this to run unitl no more fire
 		//have a status method that returns the number of trees dead and the number on fire, possible in a status object
