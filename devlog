@@ -43,3 +43,9 @@ Next steps, two things could happen:
 5/19
 	-made the data class
 		-gathers data in a fast way without GUI
+5/23
+	-altered method run in Simulator
+		-now runs in the same way draw does in GUI, excetp data is also recorded in an arraylist
+	-made toString in Data and makeDataString in SImulator
+		-self explanatory
+	making isPerfect as part of a checker for run
