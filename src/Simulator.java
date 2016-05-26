@@ -6,55 +6,56 @@ import java.util.ArrayList;
 
 public class Simulator {
 	Forest forest;
-	public static ArrayList<Dataset> dataSet;
-	
-	
-	public Simulator(Forest f){ //good way to test stuff
+	public static ArrayList<Data> dataSet;
+
+	public Simulator(Forest f) { // good way to test stuff
 		forest = f;
 		f.fill();
-		for(int x = 0; x < 10; x++){
-		f.setRandomFire();
+		for (int x = 0; x < 10; x++) {
+			f.setRandomFire();
 		}
 	}
-	
-	public void reset(double dense){
-		forest = new Forest(dense);
+
+	public void reset() {
+		forest = new Forest();
 		forest.fill();
-		for(int x = 0; x < 10; x++){
-		forest.setRandomFire();
+		for (int x = 0; x < 10; x++) {
+			forest.setRandomFire();
 		}
 	}
-	
-	public void nextGen(){
+
+	public void nextGen() {
 		forest.nextGeneration();
 	}
-	
-	
-	public void run(){ //change the end condition
-		boolean isAblaze = forest.isThereFire();
-		while(isAblaze){
-			forest.timeStep();
-			isAblaze = forest.isThereFire();
+
+	public void run() { // change the end condition
+		int gen = 0;
+		while (gen < 100) {
+			doOneStep();
+			if (!isBurning()) {
+				gen++;
+				Data temp = new Data(gen, forest);
+				dataSet.add(temp);
+				nextGen();
+				setFire();
+				System.out.println(gen + " , " + temp.getPercentBurned());
+			}
+			//System.out.println("end of while loop, perfect boolean is " + perfect);
 		}
-		Data thisForest = forest.assess(); //fix this in forest to return the data
-		dataSet.add(thisForest);
-		//have some sort of while loop that allows this to run unitl no more fire
-		//have a status method that returns the number of trees dead and the number on fire, possible in a status object
 	}
-	
-	public void displayInfo(){
-		for(int x = 0; x < dataSet.size(); x++){
+
+	public void displayInfo() {
+		for (int x = 0; x < dataSet.size(); x++) {
 			System.out.println(dataSet.get(x));
 		}
 	}
-	
-	
-	public Simulator(){
+
+	public Simulator() {
 		dataSet = new ArrayList<Data>();
 	}
-	
-	public void doOneStep(){
-		//slowDown();
+
+	public void doOneStep() {
+		// slowDown();
 		update();
 		forest.timeStep();
 		update();
@@ -67,45 +68,36 @@ public class Simulator {
 	public void setForest(Forest forest) {
 		this.forest = forest;
 	}
-	
-	public void setFire(){
-		for(int x = 0; x < 10; x++){
+
+	public void setFire() {
+		for (int x = 0; x < 20; x++) {
 			forest.setRandomFire();
 		}
 	}
-	public static void slowDown(){
-		for(int x = 0; x < 100000; x ++){
+
+	public static void slowDown() {
+		for (int x = 0; x < 100000; x++) {
 			System.out.print("");
 		}
 	}
-	
-	public static String makeDensitiesString(){
-		String builder = "";
-		for(int x = 0; x < dataSet.size(); x++){
-			builder += dataSet.get(x).getDensity();
-			builder += " ";
+
+	public static String makeDataString() {
+		String builder = ("generation, percentBurned, avverage starting fuel, average seed drop rate, average mutation rate, average catching probability, average heat degredation");
+		for (int x = 0; x < dataSet.size(); x++) {
 			builder += "\n";
+			builder += dataSet.get(x);
 		}
 		return builder;
 	}
-	
-	public static String makePercentsString(){
-		String builder = "";
-		for(int x = 0; x < dataSet.size(); x++){
-			builder += dataSet.get(x).getPercentBurned();
-			builder += " ";
-			builder += "\n";
-		}
-		return builder;
+
+	public static void writeData() {
+		writeToFile(makeDataString(), "fireData");
 	}
-	public static void writeData(){
-		writeToFile(makeDensitiesString(), "densities");
-		writeToFile(makePercentsString(), "percentages");
-	}
-	public void update(){
+
+	public void update() {
 		forest.updateForest();
 	}
-	
+
 	public static void writeToFile(String toWrite, String filename) {
 		try {
 			File file = new File("/CompSci/fireData/" + filename + ".txt");
@@ -125,8 +117,8 @@ public class Simulator {
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean isBurning(){
+
+	public boolean isBurning() {
 		return forest.isThereFire();
 	}
 

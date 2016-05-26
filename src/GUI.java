@@ -4,7 +4,7 @@ public class GUI extends PApplet {
 	int c;
 	Simulator sim;
 	Display display;
-
+	public static boolean key = true;
 	public void setup() {
 		size(640, 550); // set the size of the screen.
 		Forest f = new Forest();
@@ -31,23 +31,19 @@ public class GUI extends PApplet {
 	@Override
 	public void draw() {
 		background(200);
-		sim.doOneStep(); 
-		sim.slowDown();
-		sim.slowDown();
-		sim.slowDown();
 		display.drawGrid(sim.getForest());
+		if(key){
+			sim.doOneStep(); 
+		//display.drawGrid(sim.getForest());
 		if(!sim.isBurning()){ 
 			sim.nextGen();
 			sim.setFire();
 		}
 
-
+	}
 	}
 	
 	public void keyReleased(){
-		if(!sim.isBurning()){ 
-			sim.nextGen();
-			sim.setFire();
-		}
+		key = !key;
 	}
 }

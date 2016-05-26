@@ -5,10 +5,10 @@ public class Tree {
 	public static final int ON_FIRE = 1;
 	public static final int DEAD = 2;
 	
-	public static final double[] cpBOUNDS = {0, 1};
-	public static final double[] sfBOUNDS = {200, 250};
-	public static final double[] hdBOUNDS = {0, 20};
-	public static final double[] sdBOUNDS = {0.0, 0.2};
+	public static final double[] cpBOUNDS = {0, 1}; //should be to 1
+	public static final double[] sfBOUNDS = {0, 1000}; //200 to 250
+	public static final double[] hdBOUNDS = {0, 5};
+	public static final double[] sdBOUNDS = {0.0, 1}; //shoudl be to 0.5
 	public static final double[] mrBOUNDS = {0.0, 1};
 	
 	private int state; 

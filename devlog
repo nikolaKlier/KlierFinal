@@ -49,3 +49,7 @@ Next steps, two things could happen:
 	-made toString in Data and makeDataString in SImulator
 		-self explanatory
 	making isPerfect as part of a checker for run
+5/26
+	-final touches
+		-running non-GUI to collect data
+		-removed isPerfect, instead have data stop after a certain amount of generations
